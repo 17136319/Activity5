@@ -12,8 +12,7 @@ namespace Activty.Controllers
     public class apiController : ApiController
     {
         Activity5Entities db = new Activity5Entities();
-        
-        // GET api/<controller>
+        //Customer Api
         [System.Web.Http.Route("api/api/GetCustomer")]
         [System.Web.Mvc.HttpPost]
         public List<dynamic> GetCustomer()
@@ -21,7 +20,17 @@ namespace Activty.Controllers
            List<Customer> cuslist = db.Customers.ToList();
             return getCust(cuslist);
         }
+        [System.Web.Http.Route("api/api/addEmployee")]
+        [System.Web.Mvc.HttpPost]
+        public List<dynamic> addCustomer([FromBody] Customer customer)
+        {
 
+            db.Customers.Add(customer);
+            db.SaveChanges();
+            List<Customer> cuslist = db.Customers.ToList();
+            return getCust(cuslist);
+        }
+        //Employee Api
         [System.Web.Http.Route("api/api/GetEmployee")]
         [System.Web.Mvc.HttpPost]
         public List<dynamic> GetEmployee()
@@ -29,34 +38,23 @@ namespace Activty.Controllers
             List<Employee> emplist = db.Employees.ToList();
             return getEmp(emplist);
         }
-
+        [System.Web.Http.Route("api/api/addEmployee")]
+        [System.Web.Mvc.HttpPost]
+        public List<dynamic> addEmployee([FromBody] Employee employee)
+        {
+            
+            db.Employees.Add(employee);
+            db.SaveChanges();
+            List<Employee> emplist = db.Employees.ToList();
+            return getEmp(emplist);
+        }
+        //Sales APi
         [System.Web.Http.Route("api/api/GetSales")]
         [System.Web.Mvc.HttpPost]
         public List<dynamic> GetSales()
         {
             List<Sale> sallist = db.Sales.ToList();
             return getSal(sallist);
-        }
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
         }
         /**
          this is where all my methods begin
