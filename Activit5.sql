@@ -53,8 +53,7 @@ INSERT INTO Employee(name,Id) VALUES ('Jason',1),
 INSERT INTO Customer(name,surname) VALUES ('Ben','James'),
 ('Jack','Kruger');
 
-INSERT INTO Sales(CusID,empID) VALUES (1,1),
-(2,3);
+INSERT INTO Sales(CusID,empID) VALUES (1,1)
 INSERT INTO Sales(CusID,empID) VALUES (2,2)
 select *
 from Sales
