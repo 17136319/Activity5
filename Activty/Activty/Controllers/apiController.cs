@@ -17,18 +17,21 @@ namespace Activty.Controllers
         [System.Web.Mvc.HttpPost]
         public List<dynamic> GetCustomer()
         {
-           List<Customer> cuslist = db.Customers.ToList();
+            List<Customer> cuslist = db.Customers.ToList();
             return getCust(cuslist);
         }
         [System.Web.Http.Route("api/api/addEmployee")]
         [System.Web.Mvc.HttpPost]
-        public List<dynamic> addCustomer([FromBody] Customer customer)
+        //public List<dynamic> addCustomer([FromBody] Customer customer)
+        public HttpResponseMessage addCustomer([FromBody] Customer customer)
         {
 
             db.Customers.Add(customer);
             db.SaveChanges();
-            List<Customer> cuslist = db.Customers.ToList();
-            return getCust(cuslist);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, customer);
+            response.Headers.Add("Access-Controll-Allow-Origin", "*");
+            //List<Customer> cuslist = db.Customers.ToList();
+            return response;
         }
         //Employee Api
         [System.Web.Http.Route("api/api/GetEmployee")]
